@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ form(form) }}
+    {{ form(downloadForm) }}
+
+    <ul>
+        {% for track in tracks %}
+            <li>{{ track.time }} - {{ track.title }}</li>
+        {% endfor %}
+    </ul>
+
+    {{ dump(formats) }}
+{% endblock %}

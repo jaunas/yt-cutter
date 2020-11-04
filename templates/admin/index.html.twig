@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <p>
+        {% if isInstalled %}
+            The youtube-dl is installed with {% if version == availableVersion %}newest {% endif %}version
+            {{ version }}.
+            <br/>
+        {% endif %}
+
+        {% if version != availableVersion %}
+            Youtube-dl version {{ availableVersion }} is available.<br/>
+        {% endif %}
+
+        <a href="{{ path('install') }}">
+            {% if version == availableVersion %}
+                Reinstall
+            {% elseif isInstalled %}
+                Update
+            {% else %}
+                Install
+            {% endif %}
+        </a>
+    </p>
+{% endblock %}
