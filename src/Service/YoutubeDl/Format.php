@@ -24,7 +24,7 @@ class Format
         $this->note = $note;
     }
 
-    static public function createFromOutput(string $output)
+    public static function createFromOutput(string $output): self
     {
         $code = rtrim(substr($output, 0, 12));
         $extension = rtrim(substr($output, 13, 10));

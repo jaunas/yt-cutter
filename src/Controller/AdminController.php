@@ -15,7 +15,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AdminController extends AbstractController
 {
-
     /**
      * @Route("/", name="index")
      */
@@ -24,7 +23,7 @@ class AdminController extends AbstractController
         return $this->render('admin/index.html.twig', [
             'isInstalled' => $installer->isInstalled(),
             'version' => $installer->isInstalled() ? $installer->version() : null,
-            'availableVersion' => $installer->availableVersion()
+            'availableVersion' => $installer->availableVersion(),
         ]);
     }
 
@@ -68,7 +67,7 @@ class AdminController extends AbstractController
                 },
                 'preferred_choices' => function (Format $format) {
                     return $format->isAudioOnly();
-                }
+                },
             ])
             ->getForm();
 
@@ -76,7 +75,7 @@ class AdminController extends AbstractController
             'form' => $analyzeForm->createView(),
             'downloadForm' => $downloadForm->createView(),
             'tracks' => $tracks,
-            'formats' => $formats
+            'formats' => $formats,
         ]);
     }
 }

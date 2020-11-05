@@ -16,7 +16,7 @@ class Installer
 
     public function __construct(KernelInterface $kernel)
     {
-        $this->execPath = $kernel->getProjectDir() . '/youtube-dl';
+        $this->execPath = $kernel->getProjectDir().'/youtube-dl';
     }
 
     public function isInstalled(): bool

@@ -12,7 +12,7 @@ class Downloader
 
     public function __construct(KernelInterface $kernel)
     {
-        $this->execPath = $kernel->getProjectDir() . '/youtube-dl';
+        $this->execPath = $kernel->getProjectDir().'/youtube-dl';
     }
 
     private function getDescription(string $url): string
@@ -23,6 +23,9 @@ class Downloader
         return $process->getOutput();
     }
 
+    /**
+     * @return array<array<string>>
+     */
     private function getTracks(string $description): array
     {
         preg_match_all('/^(\d+:\d{2}(?>:\d{2})?)\W*(.*)$/m', $description, $matches);
@@ -31,13 +34,16 @@ class Downloader
         foreach ($matches[0] as $index => $match) {
             $tracks[] = [
                 'time' => $matches[1][$index],
-                'title' => $matches[2][$index]
+                'title' => $matches[2][$index],
             ];
         }
 
         return $tracks;
     }
 
+    /**
+     * @return array<array<string>>
+     */
     public function getTracksFromUrl(string $url): array
     {
         return $this->getTracks($this->getDescription($url));
@@ -57,7 +63,7 @@ class Downloader
             return !empty($line);
         });
 
-        return array_map(function($line) {
+        return array_map(function ($line) {
             return Format::createFromOutput($line);
         }, $output);
     }
